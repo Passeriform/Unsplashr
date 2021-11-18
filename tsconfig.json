@@ -4,11 +4,7 @@
     "outDir": "./build/",
     "baseUrl": "./src",
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -24,27 +20,13 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "paths": {
-      "@components/*": [
-        "components/*"
-      ],
-      "@services/*": [
-        "services/*"
-      ],
-      "@utility/*": [
-        "utility/*"
-      ],
-      "@theme": [
-        "theme"
-      ],
-      "@theme/*": [
-        "theme/*"
-      ],
-      "@assets/*": [
-        "assets/*"
-      ]
+      "@components/*": ["components/*"],
+      "@services/*": ["services/*"],
+      "@utility/*": ["utility/*"],
+      "@theme": ["theme"],
+      "@theme/*": ["theme/*"],
+      "@assets/*": ["assets/*"]
     }
   },
-  "include": [
-    "./src/**/*"
-  ]
+  "include": ["./src/**/*"]
 }

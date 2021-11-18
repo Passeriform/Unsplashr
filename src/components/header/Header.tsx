@@ -7,11 +7,11 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 
-import { Search } from "@components/search/Search"
-import { ColorModeToggle } from "@components/color-mode-toggle/ColorModeToggle"
+import { Search } from "@components/search/Search";
+import { ColorModeToggle } from "@components/color-mode-toggle/ColorModeToggle";
 
 const NavTab = (props: any) => {
-  const { isEnd, children, to = "/", ...attribs } = props
+  const { isEnd, children, to = "/", ...attribs } = props;
   return (
     <Link
       m={0}
@@ -25,11 +25,11 @@ const NavTab = (props: any) => {
     >
       {children}
     </Link>
-  )
-}
+  );
+};
 
 export const Header = (props: any) => {
-  const color = useColorModeValue("#333333", "#FFFFFF")
+  const color = useColorModeValue("#333333", "#FFFFFF");
 
   return (
     <Flex
@@ -40,29 +40,26 @@ export const Header = (props: any) => {
       h={24}
       {...props}
     >
-        <Link
-          href="/"
-          style={{ textDecoration: "none" }}
+      <Link href="/" style={{ textDecoration: "none" }}>
+        <Heading
+          as="h2"
+          fontFamily="Pattaya"
+          fontSize={30}
+          textAlign="center"
+          color={color}
         >
-          <Heading
-            as="h2"
-            fontFamily="Pattaya"
-            fontSize={30}
-            textAlign="center"
-            color={color}
-          >
-            Image Gallery
-          </Heading>
-        </Link>
-        <HStack>
-          <Search
-            placeholder="Search images here"
-          />
-          <NavTab to="#">Explore</NavTab>
-          <NavTab to="#">Collection</NavTab>
-          <NavTab to="#" isEnd>Community</NavTab>
-        </HStack>
-        <ColorModeToggle />
+          Image Gallery
+        </Heading>
+      </Link>
+      <HStack>
+        <Search placeholder="Search images here" />
+        <NavTab to="#">Explore</NavTab>
+        <NavTab to="#">Collection</NavTab>
+        <NavTab to="#" isEnd>
+          Community
+        </NavTab>
+      </HStack>
+      <ColorModeToggle />
     </Flex>
   );
-}
+};
