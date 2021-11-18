@@ -31,15 +31,19 @@ const loaderOptions = {
 
 export const Board = () => {
   const { searchTerm } = useContext(SearchContext);
+  const [isLoading, setIsLoading] = useState(false);
   const [feed, setFeed] = useState([] as Basic[]);
   const [active, setActive] = useState({} as Basic);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  const hydrateFeed = async () => {
+    const { results } = await fetchFeed();
+    setFeed(results);
+    setIsLoading(false)
+  };
+
   useEffect(() => {
-    const hydrateFeed = async () => {
-      const { results } = await fetchFeed();
-      setFeed(results);
-    };
+    setIsLoading(true)
     hydrateFeed();
   }, []);
 
@@ -47,25 +51,34 @@ export const Board = () => {
     const handleSearch = async () => {
       const { results } = await fetchSearchFeed(searchTerm);
       setFeed(results);
+      setIsLoading(false);
     };
 
     if (searchTerm) {
       const typingDebounce = setTimeout(() => {
+        setIsLoading(true);
         handleSearch();
       }, 20);
 
       return () => clearTimeout(typingDebounce);
     }
 
-    setFeed(feed);
-  }, [searchTerm, feed]);
+    hydrateFeed();
+  }, [searchTerm]);
 
   const processExplore = (feedItem: Basic) => {
     setActive(feedItem);
     onOpen();
   };
 
-  return feed.length ? (
+  return isLoading ? (
+    <Flex align="center" justify="space-around" direction="column">
+      <Lottie options={loaderOptions} height={400} width={400} />
+      <Text color="#A7A7A7" fontSize={24} fontWeight={700}>
+        Loading some awesome images...
+      </Text>
+    </Flex>
+  ) : (
     <>
       <Modal
         closeOnOverlayClick={true}
@@ -84,16 +97,17 @@ export const Board = () => {
           </ModalBody>
         </ModalContent>
       </Modal>
-      <Box
-        padding={8}
-        w="100%"
-        maxW="100vw"
-        mx="auto"
-        sx={{ columnCount: [1, 2, 3], columnGap: "4" }}
-      >
-        {feed.length ? (
-          feed.map((feedItem: Basic) => (
+      {feed.length ? (
+        <Box
+          padding={8}
+          w="100%"
+          maxW="100vw"
+          mx="auto"
+          sx={{ columnCount: [1, 2, 3], columnGap: "4" }}
+        >
+          {feed.map((feedItem: Basic) => (
             <ImageCard
+              key={feedItem.id}
               cardProps={{
                 mb: "4",
               }}
@@ -108,18 +122,15 @@ export const Board = () => {
                 likes={feedItem.likes}
               ></ImageDetails>
             </ImageCard>
-          ))
-        ) : (
-          <Text>No Results!</Text>
-        )}
+          ))}
       </Box>
+    ) : (
+      <Flex align="center" justify="center" direction="column">
+        <Text color="#A7A7A7" fontSize={24} fontWeight={700} m={12}>
+          No results were found for the search...
+        </Text>
+      </Flex>
+    )}
     </>
-  ) : (
-    <Flex align="center" justify="space-around" direction="column">
-      <Lottie options={loaderOptions} height={400} width={400} />
-      <Text color="#A7A7A7" fontSize={24} fontWeight={700}>
-        Loading some awesome images...
-      </Text>
-    </Flex>
   );
 };
