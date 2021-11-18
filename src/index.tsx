@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { render } from "react-dom";
 import { ColorModeScript } from "@chakra-ui/react";
 import App from "./App";
 import { SearchContextProvider } from "./components/search/SearchContextProvider";
@@ -8,7 +8,7 @@ import "./index.css";
 import theme from "./theme";
 import reportWebVitals from "./reportWebVitals";
 
-ReactDOM.render(
+render(
   <React.StrictMode>
     <ColorModeScript initialColorMode={theme.config.initialColorMode} />
     <SearchContextProvider>

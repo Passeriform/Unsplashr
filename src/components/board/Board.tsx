@@ -11,16 +11,16 @@ import {
 } from "@chakra-ui/react";
 import { useState, useEffect, useContext } from "react";
 import { Basic } from "unsplash-js/dist/methods/photos/types";
-import Lottie from "react-lottie";
-import animationData from "@assets/lotties/loading.json";
+import Lottie, { Options } from "react-lottie";
 
 import { Describe } from "@components/describe/Describe";
 import { ImageCard } from "@components/image-card/ImageCard";
 import { ImageDetails } from "@components/image-details/ImageDetails";
 import { SearchContext } from "@components/search/SearchContextProvider";
 import { fetchFeed, fetchSearchFeed } from "@services/feedService";
+import animationData from "@assets/lotties/loading.json";
 
-const loaderOptions = {
+const loaderOptions: Options = {
   loop: true,
   autoplay: true,
   animationData: animationData,
@@ -39,11 +39,11 @@ export const Board = () => {
   const hydrateFeed = async () => {
     const { results } = await fetchFeed();
     setFeed(results);
-    setIsLoading(false)
+    setIsLoading(false);
   };
 
   useEffect(() => {
-    setIsLoading(true)
+    setIsLoading(true);
     hydrateFeed();
   }, []);
 
@@ -123,14 +123,14 @@ export const Board = () => {
               ></ImageDetails>
             </ImageCard>
           ))}
-      </Box>
-    ) : (
-      <Flex align="center" justify="center" direction="column">
-        <Text color="#A7A7A7" fontSize={24} fontWeight={700} m={12}>
-          No results were found for the search...
-        </Text>
-      </Flex>
-    )}
+        </Box>
+      ) : (
+        <Flex align="center" justify="center" direction="column">
+          <Text color="#A7A7A7" fontSize={24} fontWeight={700} m={12}>
+            No results were found for the search...
+          </Text>
+        </Flex>
+      )}
     </>
   );
 };

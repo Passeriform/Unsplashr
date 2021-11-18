@@ -80,7 +80,7 @@ export const ImageDetails = (props: any) => {
             );
 
             return (
-              <Link href={href}>
+              <Link href={href} key={mediaType.toString()}>
                 <HStack p={4}>
                   <Icon as={icon} w={6} h={6} />
                   <Text
