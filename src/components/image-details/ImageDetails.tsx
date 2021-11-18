@@ -12,10 +12,8 @@ import {
 } from "@chakra-ui/react";
 import { TiThumbsUp } from "react-icons/ti";
 
-import {
-  minimizeWithSuffix,
-} from "../../utility/conversion"
-import { getMediaPlugMeta, formatHandle, SocialMediaType } from "../../utility/social"
+import { minimizeWithSuffix } from "@utility/conversion"
+import { getMediaPlugMeta, formatHandle, SocialMediaType } from "@utility/social"
 
 export interface ImageDetailsProps {
   name: string

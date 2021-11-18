@@ -4,8 +4,8 @@ import {
   Flex,
 } from "@chakra-ui/react";
 
-import { ImageDetails } from "../image-details/ImageDetails"
-import { pickBy } from "../../utility/conversion"
+import { ImageDetails } from "@components/image-details/ImageDetails"
+import { pickBy } from "@utility/conversion"
 
 export const Explore = (props: any) => {
   const { model } = props

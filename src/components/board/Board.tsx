@@ -16,13 +16,13 @@ import {
 } from "react";
 import { Basic } from 'unsplash-js/dist/methods/photos/types';
 import Lottie from 'react-lottie';
-import animationData from '../../assets/lotties/loading.json';
+import animationData from '@assets/lotties/loading.json';
 
-import { Explore } from "../../components/explore/Explore"
-import { ImageCard } from "../../components/image-card/ImageCard"
-import { ImageDetails } from "../../components/image-details/ImageDetails"
-import { SearchContext } from "../../components/search/SearchContextProvider";
-import { fetchFeed, fetchSearchFeed } from "../../services/feedService";
+import { Explore } from "@components/describe/Describe"
+import { ImageCard } from "@components/image-card/ImageCard"
+import { ImageDetails } from "@components/image-details/ImageDetails"
+import { SearchContext } from "@components/search/SearchContextProvider";
+import { fetchFeed, fetchSearchFeed } from "@services/feedService";
 
 const loaderOptions = {
   loop: true,

@@ -7,8 +7,8 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 
-import { Search } from "../../components/search/Search"
-import { ColorModeToggle } from "../color-mode-toggle/ColorModeToggle"
+import { Search } from "@components/search/Search"
+import { ColorModeToggle } from "@components/color-mode-toggle/ColorModeToggle"
 
 const NavTab = (props: any) => {
   const { isEnd, children, to = "/", ...attribs } = props

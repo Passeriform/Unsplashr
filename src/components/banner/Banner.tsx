@@ -7,8 +7,8 @@ import {
   VStack,
 } from "@chakra-ui/react";
 
-import { Search } from "../../components/search/Search"
-import splashImage from "../../assets/images/splash.png"
+import { Search } from "@components/search/Search"
+import splashImage from "@assets/images/splash.png"
 
 export const Banner = () => {
   return <Flex
