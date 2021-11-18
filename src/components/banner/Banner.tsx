@@ -1,4 +1,3 @@
-import React from "react";
 import { Heading, Image, Flex, Text, VStack } from "@chakra-ui/react";
 
 import { Search } from "@components/search/Search";
