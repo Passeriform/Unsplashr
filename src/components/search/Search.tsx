@@ -51,10 +51,9 @@ export const Search = (props: SearchProps) => {
         pointerEvents="none"
         color={searchIconColor}
         fontSize="1.2em"
-        children={
-          <SearchIcon />
-        }
-      />
+      >
+        <SearchIcon />
+      </InputLeftElement>
       <Input
         focusBorderColor="none"
         pl={(size === "lg") ? 14 : 10}

@@ -108,16 +108,14 @@ export const Board = () => {
               imageSource={feedItem.urls.small}
               imageAlt={feedItem.description}
               onClick={() => processExplore(feedItem)}
-              content={
-                <ImageDetails
-                  name={feedItem.user.name}
-                  handle={feedItem.user.username}
-                  avatarSource={feedItem.user.profile_image.medium}
-                  likes={feedItem.likes}
-                >
-                </ImageDetails>
-              }
             >
+              <ImageDetails
+                name={feedItem.user.name}
+                handle={feedItem.user.username}
+                avatarSource={feedItem.user.profile_image.medium}
+                likes={feedItem.likes}
+              >
+              </ImageDetails>
             </ImageCard>
           )) : <Text>No Results!</Text>
       }

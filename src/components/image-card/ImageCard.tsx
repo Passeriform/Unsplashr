@@ -5,7 +5,7 @@ import {
 } from "@chakra-ui/react";
 
 export const ImageCard = (props: any) => {
-  const { maxWidth, imageSource, imageAlt, content, onClick, cardProps, imageProps } = props
+  const { maxWidth, imageSource, imageAlt, children, onClick, cardProps, imageProps } = props
   const borderColor = useColorModeValue("#E5E5E5", "#141414")
 
   return <VStack
@@ -25,6 +25,6 @@ export const ImageCard = (props: any) => {
       w="100%"
       {...imageProps}
     />
-    { content }
+    { children }
   </VStack>
 }
