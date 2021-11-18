@@ -31,6 +31,11 @@ module.exports = {
       {
         pathGroups: [
           {
+            pattern: "@config/**",
+            group: "parent",
+            position: "before",
+          },
+          {
             pattern: "@components/**",
             group: "parent",
             position: "before",

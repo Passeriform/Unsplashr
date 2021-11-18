@@ -54,9 +54,7 @@ export const Header = (props: any) => {
         <Search placeholder="Search images here" />
         <NavTab to="#">Explore</NavTab>
         <NavTab to="#">Collection</NavTab>
-        <NavTab to="#" isEnd>
-          Community
-        </NavTab>
+        <NavTab to="#" isEnd>Community</NavTab>
       </HStack>
       <ColorModeToggle />
     </Flex>

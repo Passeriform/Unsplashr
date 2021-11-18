@@ -11,23 +11,15 @@ import {
 } from "@chakra-ui/react";
 import { useState, useEffect, useContext } from "react";
 import { Basic } from "unsplash-js/dist/methods/photos/types";
-import Lottie, { Options } from "react-lottie";
+import Lottie from "react-lottie";
 
+import { LOADER_OPTIONS } from "@config/lottie"
+import { SEARCH_DEBOUNCE_TIME } from "@config/global"
 import { Describe } from "@components/describe/Describe";
 import { ImageCard } from "@components/image-card/ImageCard";
 import { ImageDetails } from "@components/image-details/ImageDetails";
 import { SearchContext } from "@components/search/SearchContextProvider";
 import { fetchFeed, fetchSearchFeed } from "@services/feedService";
-import animationData from "@assets/lotties/loading.json";
-
-const loaderOptions: Options = {
-  loop: true,
-  autoplay: true,
-  animationData: animationData,
-  rendererSettings: {
-    preserveAspectRatio: "xMidYMid slice",
-  },
-};
 
 export const Board = () => {
   const { searchTerm } = useContext(SearchContext);
@@ -58,7 +50,7 @@ export const Board = () => {
       const typingDebounce = setTimeout(() => {
         setIsLoading(true);
         handleSearch();
-      }, 20);
+      }, SEARCH_DEBOUNCE_TIME);
 
       return () => clearTimeout(typingDebounce);
     }
@@ -73,7 +65,7 @@ export const Board = () => {
 
   return isLoading ? (
     <Flex align="center" justify="space-around" direction="column">
-      <Lottie options={loaderOptions} height={400} width={400} />
+      <Lottie options={LOADER_OPTIONS} height={400} width={400} isClickToPauseDisabled />
       <Text color="#A7A7A7" fontSize={24} fontWeight={700}>
         Loading some awesome images...
       </Text>
