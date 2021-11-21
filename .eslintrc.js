@@ -36,6 +36,11 @@ module.exports = {
             position: "before",
           },
           {
+            pattern: "@hooks/**",
+            group: "parent",
+            position: "before",
+          },
+          {
             pattern: "@components/**",
             group: "parent",
             position: "before",
