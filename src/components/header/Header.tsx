@@ -3,58 +3,35 @@ import {
   Flex,
   Heading,
   HStack,
-  useColorModeValue,
+  useMultiStyleConfig,
 } from "@chakra-ui/react";
 
 import { Search } from "@components/search/Search";
 import { ColorModeToggle } from "@components/color-mode-toggle/ColorModeToggle";
 
-const NavTab = (props: any) => {
-  const { isEnd, children, to = "/", ...attribs } = props;
-  return (
-    <Link
-      m={0}
-      p={4}
-      display="block"
-      to={to}
-      style={{ textDecoration: "none" }}
-      fontWeight={700}
-      fontSize={12}
-      {...attribs}
-    >
-      {children}
-    </Link>
-  );
-};
+import { NavTab } from "./NavTab";
 
 export const Header = (props: any) => {
-  const color = useColorModeValue("#333333", "#FFFFFF");
+  const styles = useMultiStyleConfig("Header", {});
 
   return (
     <Flex
       as="nav"
       align="center"
       justify="space-around"
-      wrap="nowrap"
-      h={24}
+      sx={styles.container}
       {...props}
     >
-      <Link href="/" style={{ textDecoration: "none" }}>
-        <Heading
-          as="h2"
-          fontFamily="Pattaya"
-          fontSize={30}
-          textAlign="center"
-          color={color}
-        >
+      <Link href="/" style={{ textDecoration: "none" }} sx={styles.logo}>
+        <Heading as="h2" sx={styles.logoText}>
           Image Gallery
         </Heading>
       </Link>
-      <HStack>
+      <HStack sx={styles.navSearch}>
         <Search placeholder="Search images here" />
         <NavTab to="#">Explore</NavTab>
         <NavTab to="#">Collection</NavTab>
-        <NavTab to="#" isEnd>Community</NavTab>
+        <NavTab to="#">Community</NavTab>
       </HStack>
       <ColorModeToggle />
     </Flex>

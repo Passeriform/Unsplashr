@@ -8,18 +8,20 @@ import {
   Flex,
   Text,
   useDisclosure,
+  useMultiStyleConfig,
 } from "@chakra-ui/react";
 import { useState, useEffect, useContext } from "react";
 import { Basic } from "unsplash-js/dist/methods/photos/types";
-import Lottie from "react-lottie";
 
-import { LOADER_OPTIONS } from "@config/lottie"
-import { SEARCH_DEBOUNCE_TIME } from "@config/global"
+import { SEARCH_DEBOUNCE_TIME } from "@config/global";
+import { Loader } from "@components/loader/Loader";
 import { Describe } from "@components/describe/Describe";
 import { ImageCard } from "@components/image-card/ImageCard";
 import { ImageDetails } from "@components/image-details/ImageDetails";
 import { SearchContext } from "@components/search/SearchContextProvider";
 import { fetchFeed, fetchSearchFeed } from "@services/feedService";
+
+const BOARD_ITEM_GAP = 4;
 
 export const Board = () => {
   const { searchTerm } = useContext(SearchContext);
@@ -27,6 +29,8 @@ export const Board = () => {
   const [feed, setFeed] = useState([] as Basic[]);
   const [active, setActive] = useState({} as Basic);
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const styles = useMultiStyleConfig("Board", {});
 
   const hydrateFeed = async () => {
     const { results } = await fetchFeed();
@@ -58,18 +62,13 @@ export const Board = () => {
     hydrateFeed();
   }, [searchTerm]);
 
-  const processExplore = (feedItem: Basic) => {
+  const openDescribeModal = (feedItem: Basic) => {
     setActive(feedItem);
     onOpen();
   };
 
   return isLoading ? (
-    <Flex align="center" justify="space-around" direction="column">
-      <Lottie options={LOADER_OPTIONS} height={400} width={400} isClickToPauseDisabled />
-      <Text color="#A7A7A7" fontSize={24} fontWeight={700}>
-        Loading some awesome images...
-      </Text>
-    </Flex>
+    <Loader text={"Loading some awesome images..."} size={"md"} />
   ) : (
     <>
       <Modal
@@ -83,31 +82,31 @@ export const Board = () => {
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalCloseButton w={10} h={10} borderRadius={20} />
-          <ModalBody p={0}>
+          <ModalCloseButton />
+          <ModalBody>
             <Describe model={active} />
           </ModalBody>
         </ModalContent>
       </Modal>
       {feed.length ? (
         <Box
-          padding={8}
-          w="100%"
-          maxW="100vw"
-          mx="auto"
-          sx={{ columnCount: [1, 2, 3], columnGap: "4" }}
+          sx={{
+            ...styles.container,
+            ...{ columnCount: [1, 2, 3], columnGap: BOARD_ITEM_GAP.toString() },
+          }}
         >
           {feed.map((feedItem: Basic) => (
             <ImageCard
               key={feedItem.id}
               cardProps={{
-                mb: "4",
+                mb: BOARD_ITEM_GAP,
               }}
               imageSource={feedItem.urls.small}
               imageAlt={feedItem.description}
-              onClick={() => processExplore(feedItem)}
+              onClick={() => openDescribeModal(feedItem)}
             >
               <ImageDetails
+                size="md"
                 name={feedItem.user.name}
                 handle={feedItem.user.username}
                 avatarSource={feedItem.user.profile_image.medium}
@@ -118,7 +117,7 @@ export const Board = () => {
         </Box>
       ) : (
         <Flex align="center" justify="center" direction="column">
-          <Text color="#A7A7A7" fontSize={24} fontWeight={700} m={12}>
+          <Text variant="loaderInfo">
             No results were found for the search...
           </Text>
         </Flex>

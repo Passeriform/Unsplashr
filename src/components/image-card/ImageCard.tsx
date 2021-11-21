@@ -1,4 +1,4 @@
-import { VStack, Image, useColorModeValue } from "@chakra-ui/react";
+import { VStack, Image, useMultiStyleConfig } from "@chakra-ui/react";
 
 export const ImageCard = (props: any) => {
   const {
@@ -10,21 +10,22 @@ export const ImageCard = (props: any) => {
     cardProps,
     imageProps,
   } = props;
-  const borderColor = useColorModeValue("#E5E5E5", "#141414");
+
+  const styles = useMultiStyleConfig("ImageCard", {});
 
   return (
     <VStack
-      w="100%"
       maxWidth={maxWidth}
-      borderRadius={8}
-      border="1px"
-      borderColor={borderColor}
-      boxShadow="lg"
-      overflow="hidden"
       onClick={onClick}
+      sx={styles.container}
       {...cardProps}
     >
-      <Image src={imageSource} alt={imageAlt} w="100%" {...imageProps} />
+      <Image
+        src={imageSource}
+        alt={imageAlt}
+        sx={styles.image}
+        {...imageProps}
+      />
       {children}
     </VStack>
   );

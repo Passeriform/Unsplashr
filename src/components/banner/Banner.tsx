@@ -1,33 +1,44 @@
-import { Heading, Image, Flex, Text, VStack } from "@chakra-ui/react";
+import {
+  Heading,
+  Image,
+  Flex,
+  Text,
+  VStack,
+  useMultiStyleConfig,
+} from "@chakra-ui/react";
 
 import { Search } from "@components/search/Search";
 import splashImage from "@assets/images/splash.png";
 
 export const Banner = () => {
+  const styles = useMultiStyleConfig("Banner", {});
+
   return (
     <Flex
       direction="column"
       align="center"
       justify="space-around"
-      minWidth={600}
+      sx={styles.container}
     >
+      {/* TODO: Convert to absolute in relative parent approach. */}
       <Image src={splashImage} alt="Splash Image" />
       <Flex
         direction="column"
         align="center"
         justify="space-around"
-        pos="absolute"
+        sx={styles.content}
       >
-        <VStack pb={4}>
-          <Heading color="#FFFFFF" pb={4}>
+        <VStack sx={styles.textGroup}>
+          <Heading sx={styles.title}>
             Download High Quality Images By Creators
           </Heading>
-          <Text fontSize={14} fontWeight={500} color="#C4C4C4">
+          <Text sx={styles.subtitle}>
             Over 2.4 million+ stock images by our talented community
           </Text>
         </VStack>
         <Search
           size="lg"
+          width="80%"
           placeholder="Search high resolution Images, categories, wallpapers"
         />
       </Flex>

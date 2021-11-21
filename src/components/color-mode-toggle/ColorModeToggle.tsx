@@ -1,7 +1,15 @@
-import { HStack, Switch, Text, useColorMode } from "@chakra-ui/react";
+import {
+  HStack,
+  Switch,
+  Text,
+  useColorMode,
+  useMultiStyleConfig,
+} from "@chakra-ui/react";
 
-export const ColorModeToggle = (props: any) => {
+export const ColorModeToggle = () => {
   const { colorMode, toggleColorMode } = useColorMode();
+
+  const styles = useMultiStyleConfig("ColorModeToggle", {});
 
   const getTogglePrompt = () =>
     colorMode === "light" ? "Dark Mode" : "Light Mode";
@@ -9,20 +17,12 @@ export const ColorModeToggle = (props: any) => {
   return (
     <HStack
       as="button"
-      w={40}
-      align="center"
-      justify="center"
+      flexShrink={0}
       onClick={toggleColorMode}
+      sx={styles.container}
     >
-      <Text fontWeight={700} fontSize={12}>
-        {" "}
-        {getTogglePrompt()}{" "}
-      </Text>
-      <Switch
-        isChecked={colorMode === "dark"}
-        onChange={toggleColorMode}
-        colorScheme="blue"
-      />
+      <Text sx={styles.text}>{getTogglePrompt()}</Text>
+      <Switch isChecked={colorMode === "dark"} />
     </HStack>
   );
 };

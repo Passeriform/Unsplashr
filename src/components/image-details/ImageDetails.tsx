@@ -7,7 +7,7 @@ import {
   Link,
   HStack,
   VStack,
-  useColorModeValue,
+  useMultiStyleConfig,
 } from "@chakra-ui/react";
 import { TiThumbsUp } from "react-icons/ti";
 
@@ -24,7 +24,7 @@ export interface ImageDetailsProps {
   avatarSource: string;
   mediaPlugs: Record<SocialMediaType, string>;
   likes: number;
-  isExpanded: boolean;
+  size: string;
 }
 
 export const ImageDetails = (props: any) => {
@@ -34,40 +34,37 @@ export const ImageDetails = (props: any) => {
     avatarSource,
     mediaPlugs = {} as Record<SocialMediaType, string>,
     likes = 0,
-    isExpanded,
+    size,
   }: ImageDetailsProps = props;
 
-  const color = useColorModeValue("#4F4F4F", "#E5E5E5");
+  const styles = useMultiStyleConfig("ImageDetails", { size });
 
   return (
-    <Flex w="100%" p={4} align="center" justify="space-around">
-      {/* Can default to Name Initials */}
-      <Image
+    <Flex
+      align="center"
+      justify="space-around"
+      sx={styles.container}
+    >
       <Avatar
         name={name}
         src={avatarSource}
-        w={isExpanded ? 16 : 10}
-        h={isExpanded ? 16 : 10}
-        borderRadius={2 * (isExpanded ? 16 : 10)}
+        sx={styles.avatar}
       />
-      <Flex pl={4} flexGrow={1} align="center">
+      <Flex
+        align="center"
+        sx={styles.details}
+      >
         <VStack align="start">
           <Heading
             as="h4"
-            size="md"
-            fontSize={isExpanded ? 14 : 12}
-            color={color}
+            sx={styles.heading}
           >
             {name}
           </Heading>
           {handle && (
             <Text
-              fontFamily="Poppins"
-              fontSize={isExpanded ? 12 : 10}
-              fontWeight={600}
-              mt={0}
-              fontStyle="italic"
-              color="#A7A7A7"
+              variant="subtitle"
+              sx={styles.handle}
             >
               {formatHandle(handle)}
             </Text>
@@ -81,16 +78,14 @@ export const ImageDetails = (props: any) => {
             );
 
             return (
-              <Link href={href} key={mediaType.toString()}>
+              <Link
+                href={href}
+                key={mediaType.toString()}
+                isExternal
+              >
                 <HStack p={4}>
-                  <Icon as={icon} w={6} h={6} />
-                  <Text
-                    fontFamily="Poppins"
-                    fontSize={12}
-                    fontWeight={600}
-                    fontStyle="italic"
-                    color="#A7A7A7"
-                  >
+                  <Icon as={icon} sx={styles.mediaIcon} />
+                  <Text variant="subtitle" sx={styles.mediaHandle}>
                     /{username}
                   </Text>
                 </HStack>
@@ -100,14 +95,8 @@ export const ImageDetails = (props: any) => {
         </HStack>
       </Flex>
       <HStack>
-        <Icon as={TiThumbsUp} w={6} h={6} />
-        <Text
-          fontSize={isExpanded ? 15 : 12}
-          fontWeight={600}
-          color={isExpanded ? "#858484" : color}
-        >
-          {minimizeWithSuffix(likes)}
-        </Text>
+        <Icon as={TiThumbsUp} sx={styles.likeIcon} />
+        <Text sx={styles.likeCount}>{minimizeWithSuffix(likes)}</Text>
       </HStack>
     </Flex>
   );

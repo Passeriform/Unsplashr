@@ -1,22 +1,73 @@
-import { Image, Link, Flex } from "@chakra-ui/react";
+import { SyntheticEvent, useState, useRef } from "react";
+import {
+  Image,
+  Link,
+  Flex,
+  Portal,
+  useMultiStyleConfig,
+} from "@chakra-ui/react";
 
+import { useResize } from "@hooks/useResize";
 import { ImageDetails } from "@components/image-details/ImageDetails";
+import { Loader } from "@components/loader/Loader";
 import { pickBy } from "@utility/conversion";
+import { imageFillsContainer } from "@utility/image";
 
 export const Describe = (props: any) => {
   const { model } = props;
 
+  const imageContainer = useRef(null);
+  const loaderContainer = useRef(null);
+
+  const [isContainable, setIsContainable] = useState(true);
+  const [isImageLoading, setIsImageLoading] = useState(true);
+
+  const containerDimensions = useResize<HTMLDivElement>(imageContainer);
+
+  const styles = useMultiStyleConfig("Describe", {});
+
+  const imageLoadedHandler = (
+    event: SyntheticEvent<HTMLImageElement, Event>
+  ) => {
+    setIsContainable(imageFillsContainer(event.currentTarget, containerDimensions));
+    setIsImageLoading(false);
+  };
+
+  const fallbackLoader = (
+    <Portal containerRef={loaderContainer}>
+      <Loader text={"Loading image..."} size={"lg"} />
+    </Portal>
+  );
+
   return (
-    <Flex w="100%" align="center" justify="center" direction="column">
-      <Link href={model.urls.raw}>
+    <Flex
+      align="center"
+      justify="start"
+      direction="column"
+      ref={imageContainer}
+      sx={styles.container}
+    >
+      {isImageLoading && (
+        <Flex
+          align="center"
+          justify="space-around"
+          direction="column"
+          ref={loaderContainer}
+          sx={styles.loaderContainer}
+        ></Flex>
+      )}
+      <Link href={model.urls.raw} sx={styles.imageWrapper} isExternal>
         <Image
           src={model.urls.full}
           alt={model.description}
-          maxHeight={500}
-          isExternal
+          fallback={fallbackLoader}
+          onLoad={imageLoadedHandler}
+          fit={isContainable ? "cover" : "contain"}
+          sx={styles.image}
         />
       </Link>
       <ImageDetails
+        size="full"
         name={model.user.name}
         handle={model.user.username}
         avatarSource={model.user.profile_image.medium}
@@ -25,7 +76,6 @@ export const Describe = (props: any) => {
           instagram: model.user.instagram_username,
           twitter: model.user.twitter_username,
         })}
-        isExpanded
       ></ImageDetails>
     </Flex>
   );
