@@ -1,7 +1,10 @@
 module.exports = {
   extends: [
+    "eslint:recommended",
     "react-app",
     "react-app/jest",
+    "airbnb",
+    "airbnb/hooks",
     "plugin:react/recommended",
     "plugin:import/recommended",
     "plugin:import/typescript",
@@ -26,6 +29,16 @@ module.exports = {
   rules: {
     "react/jsx-uses-react": "off",
     "react/react-in-jsx-scope": "off",
+    "sort-imports": [
+      "error",
+      {
+        ignoreCase: false,
+        ignoreDeclarationSort: false,
+        ignoreMemberSort: false,
+        memberSyntaxSortOrder: ["none", "all", "multiple", "single"],
+        allowSeparatedGroups: false,
+      },
+    ],
     "import/order": [
       "error",
       {
