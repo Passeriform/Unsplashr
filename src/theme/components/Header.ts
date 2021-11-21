@@ -1,12 +1,7 @@
 import { mode } from "@chakra-ui/theme-tools";
 
 export const Header = {
-  parts: [
-    "container",
-    "logo",
-    "logoText",
-    "navSearch",
-  ],
+  parts: ["container", "logo", "logoText", "navSearch"],
   baseStyle: (props: any) => ({
     container: {
       height: 24,
@@ -26,6 +21,6 @@ export const Header = {
     navSearch: {
       mx: 4,
       flexGrow: 1,
-    }
+    },
   }),
 };

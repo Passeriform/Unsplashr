@@ -4,7 +4,7 @@ export const ColorModeToggle = {
     container: {
       padding: 4,
       width: 40,
-      // HACK: Bypass onClick event-handler for controlled Switch by wrapping. 
+      // HACK: Bypass onClick event-handler for controlled Switch by wrapping.
       "& > *": {
         pointerEvents: "none",
       },

@@ -29,7 +29,9 @@ export const Describe = (props: any) => {
   const imageLoadedHandler = (
     event: SyntheticEvent<HTMLImageElement, Event>
   ) => {
-    setIsContainable(imageFillsContainer(event.currentTarget, containerDimensions));
+    setIsContainable(
+      imageFillsContainer(event.currentTarget, containerDimensions)
+    );
     setIsImageLoading(false);
   };
 

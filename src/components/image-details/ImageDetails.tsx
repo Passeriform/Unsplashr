@@ -40,32 +40,15 @@ export const ImageDetails = (props: any) => {
   const styles = useMultiStyleConfig("ImageDetails", { size });
 
   return (
-    <Flex
-      align="center"
-      justify="space-around"
-      sx={styles.container}
-    >
-      <Avatar
-        name={name}
-        src={avatarSource}
-        sx={styles.avatar}
-      />
-      <Flex
-        align="center"
-        sx={styles.details}
-      >
+    <Flex align="center" justify="space-around" sx={styles.container}>
+      <Avatar name={name} src={avatarSource} sx={styles.avatar} />
+      <Flex align="center" sx={styles.details}>
         <VStack align="start">
-          <Heading
-            as="h4"
-            sx={styles.heading}
-          >
+          <Heading as="h4" sx={styles.heading}>
             {name}
           </Heading>
           {handle && (
-            <Text
-              variant="subtitle"
-              sx={styles.handle}
-            >
+            <Text variant="subtitle" sx={styles.handle}>
               {formatHandle(handle)}
             </Text>
           )}
@@ -78,11 +61,7 @@ export const ImageDetails = (props: any) => {
             );
 
             return (
-              <Link
-                href={href}
-                key={mediaType.toString()}
-                isExternal
-              >
+              <Link href={href} key={mediaType.toString()} isExternal>
                 <HStack p={4}>
                   <Icon as={icon} sx={styles.mediaIcon} />
                   <Text variant="subtitle" sx={styles.mediaHandle}>
