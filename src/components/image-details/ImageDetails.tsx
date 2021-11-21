@@ -1,7 +1,7 @@
 import {
+  Avatar,
   Flex,
   Icon,
-  Image,
   Heading,
   Text,
   Link,
@@ -43,6 +43,8 @@ export const ImageDetails = (props: any) => {
     <Flex w="100%" p={4} align="center" justify="space-around">
       {/* Can default to Name Initials */}
       <Image
+      <Avatar
+        name={name}
         src={avatarSource}
         w={isExpanded ? 16 : 10}
         h={isExpanded ? 16 : 10}
