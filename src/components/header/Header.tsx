@@ -3,6 +3,7 @@ import {
   HStack,
   Heading,
   Link,
+  useBreakpointValue,
   useMultiStyleConfig,
 } from "@chakra-ui/react";
 
@@ -12,6 +13,8 @@ import { Search } from "@components/search/Search";
 import { NavTab } from "./NavTab";
 
 export const Header = () => {
+  const displayNavTabs = useBreakpointValue({ base: false, "2xl": true });
+  const displayModeToggle = useBreakpointValue({ base: false, lg: true });
   const styles = useMultiStyleConfig("Header", {});
 
   return (
@@ -23,11 +26,11 @@ export const Header = () => {
       </Link>
       <HStack sx={styles.navSearch}>
         <Search placeholder="Search images here" />
-        <NavTab to="#">Explore</NavTab>
-        <NavTab to="#">Collection</NavTab>
-        <NavTab to="#">Community</NavTab>
+        {displayNavTabs && <NavTab to="#">Explore</NavTab>}
+        {displayNavTabs && <NavTab to="#">Collection</NavTab>}
+        {displayNavTabs && <NavTab to="#">Community</NavTab>}
       </HStack>
-      <ColorModeToggle />
+      {displayModeToggle && <ColorModeToggle />}
     </Flex>
   );
 };

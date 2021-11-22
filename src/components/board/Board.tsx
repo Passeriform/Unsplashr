@@ -9,6 +9,7 @@ import {
   ModalOverlay,
   Text,
   useDisclosure,
+  useMediaQuery,
   useMultiStyleConfig,
 } from "@chakra-ui/react";
 import { Basic } from "unsplash-js/dist/methods/photos/types";
@@ -25,10 +26,11 @@ const BOARD_ITEM_GAP = 4;
 
 export const Board = () => {
   const { searchTerm } = useContext(SearchContext);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [isPortrait] = useMediaQuery("(orientation: portrait)");
   const [isLoading, setIsLoading] = useState(false);
   const [feed, setFeed] = useState([] as Basic[]);
   const [active, setActive] = useState({} as Basic);
-  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const styles = useMultiStyleConfig("Board", {});
 
@@ -73,7 +75,7 @@ export const Board = () => {
   ) : (
     <>
       <Modal
-        size="full"
+        size={isPortrait ? "lg" : "full"}
         motionPreset="slideInBottom"
         scrollBehavior="inside"
         isOpen={isOpen}
@@ -93,7 +95,14 @@ export const Board = () => {
         <Box
           sx={{
             ...styles.container,
-            ...{ columnCount: [1, 2, 3], columnGap: BOARD_ITEM_GAP.toString() },
+            ...{
+              columnCount: {
+                base: 1,
+                lg: 2,
+                "2xl": 3,
+              },
+              columnGap: BOARD_ITEM_GAP.toString(),
+            },
           }}
         >
           {feed.map((feedItem: Basic) => (

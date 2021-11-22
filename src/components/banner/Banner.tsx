@@ -21,7 +21,7 @@ export const Banner = () => {
       sx={styles.container}
     >
       {/* TODO: Convert to absolute in relative parent approach. */}
-      <Image src={splashImage} alt="Splash Image" />
+      <Image src={splashImage} alt="Splash Image" htmlWidth="100%" />
       <Flex
         direction="column"
         align="center"

@@ -15,7 +15,16 @@ export const Banner = {
     },
     title: {
       color: mode("brand.900", "brand.900")(props),
-      pb: 4,
+      pb: {
+        base: 0,
+        xl: 2,
+        "2xl": 4,
+      },
+      fontSize: {
+        base: "2xl",
+        xl: "3xl",
+        "2xl": "4xl",
+      },
     },
     subtitle: {
       fontSize: 14,
