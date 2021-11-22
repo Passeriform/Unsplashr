@@ -1,5 +1,5 @@
-export const minimizeWithSuffix = (num: number, digits?: number) => {
-  const _digits = digits ?? 2;
+export const minimizeWithSuffix = (num: number, _digits?: number) => {
+  const digits = _digits ?? 2;
 
   type LookupType = { limit: number; symbol: string };
 
@@ -18,10 +18,10 @@ export const minimizeWithSuffix = (num: number, digits?: number) => {
   const minimizer = minimizerDict
     .slice()
     .reverse()
-    .find((minimizer: LookupType) => num >= minimizer.limit);
+    .find((entry: LookupType) => num >= entry.limit);
 
   return minimizer
-    ? (num / minimizer.limit).toFixed(_digits).replace(pattern, "$1") +
+    ? (num / minimizer.limit).toFixed(digits).replace(pattern, "$1") +
         minimizer.symbol
     : "0";
 };
@@ -32,11 +32,11 @@ export const pickBy = <K extends string | number | symbol, V>(
 ) => {
   const result: Record<K, V> = {} as Record<K, V>;
 
-  for (const key in object) {
-    if (object.hasOwnProperty(key) && predicate(object[key])) {
-      result[key] = object[key];
+  Object.keys(object).forEach((key: string) => {
+    if (predicate(object[key as K])) {
+      result[key as K] = object[key as K];
     }
-  }
+  });
 
   return result;
 };

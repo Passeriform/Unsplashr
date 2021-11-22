@@ -1,15 +1,15 @@
-import { SyntheticEvent, useState, useRef } from "react";
+import { SyntheticEvent, useRef, useState } from "react";
 import {
+  Flex,
   Image,
   Link,
-  Flex,
   Portal,
   useMultiStyleConfig,
 } from "@chakra-ui/react";
 
-import { useResize } from "@hooks/useResize";
 import { ImageDetails } from "@components/image-details/ImageDetails";
 import { Loader } from "@components/loader/Loader";
+import { useResize } from "@hooks/useResize";
 import { pickBy } from "@utility/conversion";
 import { imageFillsContainer } from "@utility/image";
 
@@ -37,7 +37,7 @@ export const Describe = (props: any) => {
 
   const fallbackLoader = (
     <Portal containerRef={loaderContainer}>
-      <Loader text={"Loading image..."} size={"lg"} />
+      <Loader text="Loading image..." size="lg" />
     </Portal>
   );
 
@@ -56,7 +56,7 @@ export const Describe = (props: any) => {
           direction="column"
           ref={loaderContainer}
           sx={styles.loaderContainer}
-        ></Flex>
+        />
       )}
       <Link href={model.urls.raw} sx={styles.imageWrapper} isExternal>
         <Image
@@ -78,7 +78,7 @@ export const Describe = (props: any) => {
           instagram: model.user.instagram_username,
           twitter: model.user.twitter_username,
         })}
-      ></ImageDetails>
+      />
     </Flex>
   );
 };

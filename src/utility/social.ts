@@ -1,17 +1,22 @@
 import {
+  TiRss,
+  TiSocialFacebook,
   TiSocialInstagram,
   TiSocialTwitter,
-  TiSocialFacebook,
-  TiRss,
 } from "react-icons/ti";
 
-export type SocialMediaType = "instagram" | "twitter" | "facebook";
+export type SocialMediaType = "facebook" | "instagram" | "twitter";
 
 export const getMediaPlugMeta = (
   mediaType: SocialMediaType,
   username: string
 ) => {
   switch (mediaType) {
+    case "facebook":
+      return {
+        icon: TiSocialFacebook,
+        href: `https://www.facebook.com/${username}`,
+      };
     case "instagram":
       return {
         icon: TiSocialInstagram,
@@ -22,11 +27,6 @@ export const getMediaPlugMeta = (
         icon: TiSocialTwitter,
         href: `https://twitter.com/${username}`,
       };
-    case "facebook":
-      return {
-        icon: TiSocialFacebook,
-        href: `https://www.facebook.com/${username}`,
-      };
     default:
       return { icon: TiRss, href: "#" } as never;
   }
@@ -34,5 +34,6 @@ export const getMediaPlugMeta = (
 
 export const formatHandle = (nameOrHandle: string) => {
   const stripAtPattern = /^[@]*(.*)/;
+  /* eslint-disable-next-line prefer-template */
   return "@" + nameOrHandle.replace(stripAtPattern, "$1");
 };

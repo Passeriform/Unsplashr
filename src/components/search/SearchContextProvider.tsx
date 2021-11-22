@@ -1,8 +1,8 @@
-import { useState, createContext, Context } from "react";
+import { Context, createContext, useState } from "react";
 
 export type SearchContextType = {
   searchTerm: string;
-  setSearchTerm: (searchTerm: string) => void;
+  setSearchTerm: (_: string) => void;
 };
 
 export const SearchContext: Context<SearchContextType> =
@@ -12,11 +12,14 @@ export const SearchContext: Context<SearchContextType> =
   });
 
 export const SearchContextProvider = (props: any) => {
+  const { children } = props;
+
   const [searchTerm, setSearchTerm] = useState("");
 
   return (
+    // eslint-disable-next-line react/jsx-no-constructed-context-values
     <SearchContext.Provider value={{ searchTerm, setSearchTerm }}>
-      {props.children}
+      {children}
     </SearchContext.Provider>
   );
 };

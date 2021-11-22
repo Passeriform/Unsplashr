@@ -2,6 +2,7 @@ import { OrderBy } from "unsplash-js";
 import { Basic } from "unsplash-js/dist/methods/photos/types";
 
 import { logger } from "@utility/logging";
+
 import { Api } from "./api";
 
 export type PaginatedFeed = { total: number; results: Basic[] };

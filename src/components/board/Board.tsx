@@ -1,24 +1,24 @@
+import { useContext, useEffect, useState } from "react";
 import {
   Box,
+  Flex,
   Modal,
-  ModalOverlay,
-  ModalContent,
   ModalBody,
   ModalCloseButton,
-  Flex,
+  ModalContent,
+  ModalOverlay,
   Text,
   useDisclosure,
   useMultiStyleConfig,
 } from "@chakra-ui/react";
-import { useState, useEffect, useContext } from "react";
 import { Basic } from "unsplash-js/dist/methods/photos/types";
 
-import { SEARCH_DEBOUNCE_TIME } from "@config/global";
-import { Loader } from "@components/loader/Loader";
 import { Describe } from "@components/describe/Describe";
 import { ImageCard } from "@components/image-card/ImageCard";
 import { ImageDetails } from "@components/image-details/ImageDetails";
+import { Loader } from "@components/loader/Loader";
 import { SearchContext } from "@components/search/SearchContextProvider";
+import { SEARCH_DEBOUNCE_TIME } from "@config/global";
 import { fetchFeed, fetchSearchFeed } from "@services/feedService";
 
 const BOARD_ITEM_GAP = 4;
@@ -60,6 +60,7 @@ export const Board = () => {
     }
 
     hydrateFeed();
+    return () => {};
   }, [searchTerm]);
 
   const openDescribeModal = (feedItem: Basic) => {
@@ -68,17 +69,17 @@ export const Board = () => {
   };
 
   return isLoading ? (
-    <Loader text={"Loading some awesome images..."} size={"md"} />
+    <Loader text="Loading some awesome images..." size="md" />
   ) : (
     <>
       <Modal
-        closeOnOverlayClick={true}
-        closeOnEsc={true}
         size="full"
         motionPreset="slideInBottom"
         scrollBehavior="inside"
         isOpen={isOpen}
         onClose={onClose}
+        closeOnEsc
+        closeOnOverlayClick
       >
         <ModalOverlay />
         <ModalContent>
@@ -111,7 +112,7 @@ export const Board = () => {
                 handle={feedItem.user.username}
                 avatarSource={feedItem.user.profile_image.medium}
                 likes={feedItem.likes}
-              ></ImageDetails>
+              />
             </ImageCard>
           ))}
         </Box>

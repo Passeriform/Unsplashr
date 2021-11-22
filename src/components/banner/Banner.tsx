@@ -1,14 +1,14 @@
 import {
+  Flex,
   Heading,
   Image,
-  Flex,
   Text,
   VStack,
   useMultiStyleConfig,
 } from "@chakra-ui/react";
 
-import { Search } from "@components/search/Search";
 import splashImage from "@assets/images/splash.png";
+import { Search } from "@components/search/Search";
 
 export const Banner = () => {
   const styles = useMultiStyleConfig("Banner", {});

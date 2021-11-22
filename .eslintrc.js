@@ -8,7 +8,9 @@ module.exports = {
     "plugin:react/recommended",
     "plugin:import/recommended",
     "plugin:import/typescript",
+    "prettier",
   ],
+  plugins: ["prettier"],
   settings: {
     "import/extensions": [".js", ".jsx", ".ts", ".tsx"],
     "import/parsers": {
@@ -21,64 +23,124 @@ module.exports = {
       },
     },
   },
+  overrides: [
+    {
+      files: ["*.ts", "*.tsx"],
+      parserOptions: {
+        project: ["./tsconfig.json"],
+      },
+    },
+  ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
     project: "./tsconfig.json",
     tsconfigRootDir: "./",
   },
   rules: {
+    "prettier/prettier": "error",
     "react/jsx-uses-react": "off",
     "react/react-in-jsx-scope": "off",
+    "import/prefer-default-export": "off",
+    "no-use-before-define": "off",
+    "no-unused-vars": [
+      "error",
+      {
+        argsIgnorePattern: "^_",
+        varsIgnorePattern: "^_",
+        caughtErrorsIgnorePattern: "^_",
+      },
+    ],
+    "@typescript-eslint/no-use-before-define": ["error"],
+    quotes: ["error", "double"],
+    "no-console": "error",
+    "react/jsx-filename-extension": [
+      "error",
+      {
+        extensions: [".js", ".jsx", ".ts", ".tsx"],
+      },
+    ],
+    "react/function-component-definition": [
+      "error",
+      {
+        namedComponents: "arrow-function",
+      },
+    ],
+    "react/jsx-props-no-spreading": "off",
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        js: "never",
+        jsx: "never",
+        ts: "never",
+        tsx: "never",
+      },
+    ],
+    "comma-dangle": [
+      "error",
+      {
+        arrays: "always-multiline",
+        objects: "always-multiline",
+        imports: "always-multiline",
+        exports: "always-multiline",
+        functions: "never",
+      },
+    ],
     "sort-imports": [
       "error",
       {
         ignoreCase: false,
-        ignoreDeclarationSort: false,
+        ignoreDeclarationSort: true,
         ignoreMemberSort: false,
-        memberSyntaxSortOrder: ["none", "all", "multiple", "single"],
+        memberSyntaxSortOrder: ["all", "multiple", "single", "none"],
         allowSeparatedGroups: false,
       },
     ],
     "import/order": [
       "error",
       {
+        groups: [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index",
+          "object",
+        ],
         pathGroups: [
           {
-            pattern: "@config/**",
-            group: "parent",
+            pattern:
+              "@(assets|config|components|hooks|services|theme|utility)/**",
+            group: "internal",
+            position: "after",
+          },
+          {
+            pattern: "react",
+            group: "external",
             position: "before",
           },
           {
-            pattern: "@hooks/**",
-            group: "parent",
+            pattern: "react*",
+            group: "external",
             position: "before",
           },
           {
-            pattern: "@components/**",
-            group: "parent",
+            pattern: "react*/**/*",
+            group: "external",
             position: "before",
           },
           {
-            pattern: "@services/**",
-            group: "parent",
-            position: "before",
-          },
-          {
-            pattern: "@utility/**",
-            group: "parent",
-            position: "before",
-          },
-          {
-            pattern: "@theme/**",
-            group: "parent",
-            position: "before",
-          },
-          {
-            pattern: "@assets/**",
-            group: "parent",
+            pattern: "@chakra-ui/**",
+            group: "external",
             position: "before",
           },
         ],
+        pathGroupsExcludedImportTypes: ["builtin"],
+        alphabetize: {
+          order: "asc",
+        },
+        warnOnUnassignedImports: true,
       },
     ],
   },

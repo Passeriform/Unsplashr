@@ -1,4 +1,4 @@
-import { VStack, Image, useMultiStyleConfig } from "@chakra-ui/react";
+import { Image, VStack, useMultiStyleConfig } from "@chakra-ui/react";
 
 export const ImageCard = (props: any) => {
   const {

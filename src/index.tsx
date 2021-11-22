@@ -1,12 +1,13 @@
 import React from "react";
 import { render } from "react-dom";
 import { ColorModeScript } from "@chakra-ui/react";
-import App from "./App";
-import { SearchContextProvider } from "./components/search/SearchContextProvider";
 
+import { SearchContextProvider } from "@components/search/SearchContextProvider";
+
+import App from "./App";
 import "./index.css";
-import theme from "./theme";
 import reportWebVitals from "./reportWebVitals";
+import theme from "./theme";
 
 render(
   <React.StrictMode>

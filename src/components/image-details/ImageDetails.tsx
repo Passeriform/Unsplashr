@@ -1,40 +1,40 @@
+import { TiThumbsUp } from "react-icons/ti";
 import {
   Avatar,
   Flex,
-  Icon,
-  Heading,
-  Text,
-  Link,
   HStack,
+  Heading,
+  Icon,
+  Link,
+  Text,
   VStack,
   useMultiStyleConfig,
 } from "@chakra-ui/react";
-import { TiThumbsUp } from "react-icons/ti";
 
 import { minimizeWithSuffix } from "@utility/conversion";
 import {
-  getMediaPlugMeta,
-  formatHandle,
   SocialMediaType,
+  formatHandle,
+  getMediaPlugMeta,
 } from "@utility/social";
 
 export interface ImageDetailsProps {
-  name: string;
-  handle: string;
   avatarSource: string;
-  mediaPlugs: Record<SocialMediaType, string>;
+  handle: string;
+  name: string;
   likes: number;
+  mediaPlugs: Record<SocialMediaType, string>;
   size: string;
 }
 
 export const ImageDetails = (props: any) => {
   const {
-    name,
-    handle,
     avatarSource,
-    mediaPlugs = {} as Record<SocialMediaType, string>,
+    handle,
+    name,
     likes = 0,
-    size,
+    mediaPlugs = {} as Record<SocialMediaType, string>,
+    size = "md",
   }: ImageDetailsProps = props;
 
   const styles = useMultiStyleConfig("ImageDetails", { size });

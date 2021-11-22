@@ -1,11 +1,11 @@
-import { ChangeEvent, useState, useContext } from "react";
+import { ChangeEvent, useContext, useState } from "react";
+import { SearchIcon } from "@chakra-ui/icons";
 import {
+  Input,
   InputGroup,
   InputLeftElement,
-  Input,
   useMultiStyleConfig,
 } from "@chakra-ui/react";
-import { SearchIcon } from "@chakra-ui/icons";
 
 import { SearchContext } from "./SearchContextProvider";
 

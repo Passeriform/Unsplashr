@@ -1,5 +1,5 @@
-import { Flex, Text, useStyleConfig } from "@chakra-ui/react";
 import Lottie from "react-lottie";
+import { Flex, Text, useStyleConfig } from "@chakra-ui/react";
 
 import { LOADER_OPTIONS } from "@config/lottie";
 
