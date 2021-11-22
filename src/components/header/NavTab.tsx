@@ -1,8 +1,11 @@
+import { FC } from "react";
 import { Link, useStyleConfig } from "@chakra-ui/react";
 
-export const NavTab = (props: any) => {
-  const { children, to = "/" } = props;
+export type NavTabProps = {
+  to?: string;
+};
 
+export const NavTab: FC<NavTabProps> = ({ children, to = "/" }) => {
   const styles = useStyleConfig("NavTab", {});
 
   return (

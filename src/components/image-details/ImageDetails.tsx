@@ -22,21 +22,19 @@ export interface ImageDetailsProps {
   avatarSource: string;
   handle: string;
   name: string;
-  likes: number;
-  mediaPlugs: Record<SocialMediaType, string>;
-  size: string;
+  likes?: number;
+  mediaPlugs?: Record<SocialMediaType, string>;
+  size?: string;
 }
 
-export const ImageDetails = (props: any) => {
-  const {
-    avatarSource,
-    handle,
-    name,
-    likes = 0,
-    mediaPlugs = {} as Record<SocialMediaType, string>,
-    size = "md",
-  }: ImageDetailsProps = props;
-
+export const ImageDetails = ({
+  avatarSource,
+  handle,
+  name,
+  likes = 0,
+  mediaPlugs = {} as Record<SocialMediaType, string>,
+  size = "md",
+}: ImageDetailsProps) => {
   const styles = useMultiStyleConfig("ImageDetails", { size });
 
   return (

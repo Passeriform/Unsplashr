@@ -15,9 +15,11 @@ export interface SearchProps {
   placeholder: string;
 }
 
-export const Search = (props: SearchProps) => {
-  const { size = "md", width = "100%", placeholder } = props;
-
+export const Search = ({
+  placeholder,
+  size = "md",
+  width = "100%",
+}: SearchProps) => {
   const { searchTerm, setSearchTerm } = useContext(SearchContext);
 
   const [isFocussed, setIsFocussed] = useState(false);

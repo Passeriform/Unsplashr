@@ -6,16 +6,20 @@ import {
   Portal,
   useMultiStyleConfig,
 } from "@chakra-ui/react";
+import { Basic } from "unsplash-js/dist/methods/photos/types";
 
 import { ImageDetails } from "@components/image-details/ImageDetails";
 import { Loader } from "@components/loader/Loader";
 import { useResize } from "@hooks/useResize";
 import { pickBy } from "@utility/conversion";
 import { imageFillsContainer } from "@utility/image";
+import { SocialMediaType } from "@utility/social";
 
-export const Describe = (props: any) => {
-  const { model } = props;
+export type DescribeProps = {
+  model: Basic;
+};
 
+export const Describe = ({ model }: DescribeProps) => {
   const imageContainer = useRef(null);
   const loaderContainer = useRef(null);
 
@@ -61,7 +65,7 @@ export const Describe = (props: any) => {
       <Link href={model.urls.raw} sx={styles.imageWrapper} isExternal>
         <Image
           src={model.urls.full}
-          alt={model.description}
+          alt={model?.description ?? ""}
           fallback={fallbackLoader}
           onLoad={imageLoadedHandler}
           fit={isContainable ? "cover" : "contain"}
@@ -74,10 +78,12 @@ export const Describe = (props: any) => {
         handle={model.user.username}
         avatarSource={model.user.profile_image.medium}
         likes={model.likes}
-        mediaPlugs={pickBy({
-          instagram: model.user.instagram_username,
-          twitter: model.user.twitter_username,
-        })}
+        mediaPlugs={
+          pickBy({
+            instagram: model.user.instagram_username,
+            twitter: model.user.twitter_username,
+          }) as Record<SocialMediaType, string>
+        }
       />
     </Flex>
   );

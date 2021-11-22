@@ -3,9 +3,12 @@ import { Flex, Text, useStyleConfig } from "@chakra-ui/react";
 
 import { LOADER_OPTIONS } from "@config/lottie";
 
-export const Loader = (props: any) => {
-  const { size, text } = props;
+export interface LoaderProps {
+  size: string;
+  text: string;
+}
 
+export const Loader = ({ size, text }: LoaderProps) => {
   const styles = useStyleConfig("Loader", { size });
 
   return (

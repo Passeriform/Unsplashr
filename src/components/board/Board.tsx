@@ -112,7 +112,7 @@ export const Board = () => {
                 mb: BOARD_ITEM_GAP,
               }}
               imageSource={feedItem.urls.small}
-              imageAlt={feedItem.description}
+              imageAlt={feedItem?.description ?? ""}
               onClick={() => openDescribeModal(feedItem)}
             >
               <ImageDetails
