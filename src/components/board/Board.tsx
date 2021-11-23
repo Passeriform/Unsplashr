@@ -26,8 +26,11 @@ const BOARD_ITEM_GAP = 4;
 
 export const Board = () => {
   const { searchTerm } = useContext(SearchContext);
+
   const { isOpen, onOpen, onClose } = useDisclosure();
+
   const [isPortrait] = useMediaQuery("(orientation: portrait)");
+
   const [isLoading, setIsLoading] = useState(false);
   const [feed, setFeed] = useState([] as Basic[]);
   const [active, setActive] = useState({} as Basic);
